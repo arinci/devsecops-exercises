@@ -10,11 +10,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        CLUSTER_IP: [3.76.219.129]
         port: [31546, 31547]
 
     steps:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
-          target: http://${{ secrets.CLUSTER_IP }}:${{ matrix.port}}
-          artifact_name: zap_scan_${{ secrets.CLUSTER_IP }}_${{ matrix.port }}
+          target: http://${{ matrix.CLUSTER_IP }}:${{ matrix.port}}
+          artifact_name: zap_scan_${{ matrix.CLUSTER_IP }}_${{ matrix.port }}
